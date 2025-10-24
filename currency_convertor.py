@@ -17,18 +17,18 @@ def get_currency(label):
         else:
             return currency
 
+def convert(amount, source_currency, target_currency):
+    exchange_rates = {
+        "usd": {"eur": 0.85, "cad": 1.25},
+        "eur": {"usd": 1.18, "cad": 1.47},
+        "cad": {"usd": 0.80, "eur": 0.68},
+    }
+
+    if source_currency == target_currency:
+        return amount
+    return amount * exchange_rates[source_currency][target_currency]
+
 amount = get_amount()
 source_currency = get_currency("Source")
 target_currency = get_currency("Target")
-
-exchange_rates = {
-    "usd": {"eur":0.85 , "cad":1.25 },
-    "eur": {"usd":1.18 , "cad":1.47 },
-    "cad": {"usd":0.80 , "eur":0.68 },
-}
-
-if source_currency == target_currency:
-    converted_amount = amount
-else:
-    converted_amount = amount * exchange_rates[source_currency][target_currency]
-    print(f"{amount} {source_currency} is equal to {converted_amount} {target_currency}.")
+print(f"{amount} {source_currency} is equal to {target_currency}.")
